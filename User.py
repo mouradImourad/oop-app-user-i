@@ -3,7 +3,7 @@
 # 3- create three objects and assign them to three variable
 
 class User:
-    def __init__(self, name, email_address, drivers_license):
+    def __init__(self, name, email_address, drivers_license=None):
         self.name = name
         self.email_address = email_address
         self.drivers_license = drivers_license
