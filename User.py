@@ -17,18 +17,17 @@
 class User:
     all_posts = []  # Class variable to store all posts from all users
 
-    def __init__(self, name, email, drivers_licence=None):
+    def __init__(self, name, email, drivers_liscence=None):
         self.Name = name
         self.Email = email
-        self.Drivers_liscence = drivers_licence
+        self.Drivers_liscence = drivers_liscence
         self.User_posts = []  # User’s own list of posts
         # self.posts = []
 
     def create_a_post(self, content=None):
-        """Create a post and add to the personal and global lists."""
+        # Create a post and add to the personal and global lists.
         post = {"Author": self.Name, "Content": content}
         self.User_posts.append(post)
-        # self.posts.append(post)
         User.all_posts.append(post)
 
     def see_my_posts(self):
@@ -58,13 +57,19 @@ class User:
     #         print("No posts to display.")
     
     def delete_a_post(self, content=None):
-        """Delete a post by content from personal and global lists."""
-        self.User_posts = [
-            post for post in self.User_posts if post["Content"] != content
-        ]
-        User.all_posts = [post for post in User.all_posts if post["Content"] != content]
+        # Delete a post by content from personal and global lists.
+        new_user_posts = []  # Create an empty list to hold the filtered posts
+        for post in self.User_posts:
+            if post["Content"] != content:
+                new_user_posts.append(post)  # Only add posts that don't match the content to delete
+        self.User_posts = new_user_posts  # Replace the old list with the new filtered list
+       
+        new_all_posts = []  # Create an empty list to hold the filtered posts
+        for post in User.all_posts:
+            if post["Content"] != content:
+                new_all_posts.append(post)  # Only add posts that don't match the content to delete
 
-    
+        User.all_posts = new_all_posts  # Replace the old global list with the new filtered list
 
 
 
