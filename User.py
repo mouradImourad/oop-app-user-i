@@ -31,6 +31,32 @@ class User:
         # self.posts.append(post)
         User.all_posts.append(post)
 
+    def see_my_posts(self):
+        print(f"\n{'DISPLAYING ALL MY INDIVIDUAL POSTS':-^50}\n")
+        for i in self.User_posts:
+            print(f"Author: {i['Author']}\nContent:\n\t{i['Content']}\n")
+
+
+    @staticmethod
+    def see_all_posts():
+        """Display all posts from all users."""
+        if len(User.all_posts) > 0:
+            for post in User.all_posts:
+                print(f"Author: {post['Author']}, Content: {post['Content']}")
+        else:
+            print("No posts to display.")
+
+    
+    # @classmethod
+    # def see_all_posts(cls):
+    #     """Static method to display all posts from all users."""
+    #     if cls.all_posts:
+    #         print(f"\n{'DISPLAYING ALL POSTS':-^50}\n")
+    #         for post in cls.all_posts:
+    #             print(f"Author:{post['Author']}\nContent: {post['Content']}\n")
+    #     else:
+    #         print("No posts to display.")
+    
     def delete_a_post(self, content=None):
         """Delete a post by content from personal and global lists."""
         self.User_posts = [
@@ -38,20 +64,8 @@ class User:
         ]
         User.all_posts = [post for post in User.all_posts if post["Content"] != content]
 
-    @classmethod
-    def see_all_posts(cls):
-        """Static method to display all posts from all users."""
-        if cls.all_posts:
-            print(f"\n{'DISPLAYING ALL POSTS':-^50}\n")
-            for post in cls.all_posts:
-                print(f"Author:{post['Author']}\nContent: {post['Content']}\n")
-        else:
-            print("No posts to display.")
+    
 
-    def see_my_posts(self):
-        print(f"\n{'DISPLAYING ALL MY INDIVIDUAL POSTS':-^50}\n")
-        for i in self.User_posts:
-            print(f"Author: {i['Author']}\nContent:\n\t{i['Content']}\n")
 
 
 # Create users
@@ -68,4 +82,4 @@ User.see_all_posts()
 user1.delete_a_post("Hello, this is Alice!")
 user3.create_a_post("Another post from user 3")
 User.see_all_posts()
-user3.see_my_posts()
+user3.see_all_posts()
